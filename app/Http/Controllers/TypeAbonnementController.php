@@ -3,63 +3,95 @@
 namespace App\Http\Controllers;
 
 use App\Models\TypeAbonnement;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @package App\Http\Controllers
+ *
+ * Classe TypeAbonnementController
+ * Contrôleur pour gérer les types d'abonnement via une API RESTful.
+ *
+ */
 class TypeAbonnementController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Liste tous les types d'abonnement.
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $typesAbonnement = TypeAbonnement::all();
+        return response()->json($typesAbonnement);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Crée un nouveau type d'abonnement.
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|unique:type_abonnements|max:255',
+            'montant' => 'required|numeric|min:0',
+        ]);
+
+        $typeAbonnement = TypeAbonnement::create($validated);
+        return response()->json($typeAbonnement, 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Affiche un type d'abonnement spécifique.
+     *
+     * @param int $id
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function show(int $id): JsonResponse
     {
-        //
+        $typeAbonnement = TypeAbonnement::findOrFail($id);
+        return response()->json($typeAbonnement);
     }
 
     /**
-     * Display the specified resource.
+     * Met à jour un type d'abonnement spécifique.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function show(TypeAbonnement $typeAbonnement)
+    public function update(Request $request, int $id): JsonResponse
     {
-        //
+        $typeAbonnement = TypeAbonnement::findOrFail($id);
+
+        $validated = $request->validate([
+            'nom' => 'required|string|unique:type_abonnements,nom,' . $typeAbonnement->id . '|max:255',
+            'montant' => 'required|numeric|min:0',
+        ]);
+
+        $typeAbonnement->update($validated);
+        return response()->json($typeAbonnement);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Supprime un type d'abonnement spécifique.
+     *
+     * @param int $id
+     * @return JsonResponse
      */
-    public function edit(TypeAbonnement $typeAbonnement)
+    public function destroy($id)
     {
-        //
+        $typeAbonnement = TypeAbonnement::findOrFail($id);
+        $typeAbonnement->delete();
+
+        return response()->json(null, 204);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TypeAbonnement $typeAbonnement)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TypeAbonnement $typeAbonnement)
+    function selectTypeAbonnement()
     {
-        //
+        return view('typeAbonnements.select');
     }
 }

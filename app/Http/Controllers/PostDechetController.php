@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PostDechet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostDechetController extends Controller
 {
@@ -12,7 +14,8 @@ class PostDechetController extends Controller
      */
     public function index()
     {
-        //
+        $postDechets = PostDechet::with('images')->get();
+        return view('post_dechets.index', compact('postDechets'));
     }
 
     /**
@@ -20,7 +23,7 @@ class PostDechetController extends Controller
      */
     public function create()
     {
-        //
+        return view('post_dechets.create');
     }
 
     /**
@@ -28,7 +31,21 @@ class PostDechetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'contenu' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $postDechet = PostDechet::create($request->only(['contenu']));
+        // $postDechet->user_id = Auth::id();
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images', 'public');
+                $postDechet->images()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->route('index');
     }
 
     /**
@@ -36,7 +53,7 @@ class PostDechetController extends Controller
      */
     public function show(PostDechet $postDechet)
     {
-        //
+        return view('post_dechets.show', compact('postDechet'));
     }
 
     /**
@@ -44,7 +61,7 @@ class PostDechetController extends Controller
      */
     public function edit(PostDechet $postDechet)
     {
-        //
+        return view('post_dechets.edit', compact('postDechet'));
     }
 
     /**
@@ -52,7 +69,21 @@ class PostDechetController extends Controller
      */
     public function update(Request $request, PostDechet $postDechet)
     {
-        //
+        $request->validate([
+            'contenu' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $postDechet->update($request->only(['contenu']));
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images');
+                $postDechet->images()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->route('index');
     }
 
     /**
@@ -60,6 +91,13 @@ class PostDechetController extends Controller
      */
     public function destroy(PostDechet $postDechet)
     {
-        //
+        foreach ($postDechet->images as $image) {
+            Storage::delete($image->path);
+            $image->delete();
+        }
+
+        $postDechet->delete();
+
+        return redirect()->route('post-dechets.index');
     }
 }

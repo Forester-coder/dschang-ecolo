@@ -35,9 +35,10 @@ class Abonnement extends Model
     protected $fillable = [
         'date_debut',
         'date_fin',
-        'user_id',
+        'etat',
         'type_abonnement_id',
-        'moyen_paiement_id'
+        'moyen_paiement_id',
+        'user_id'
     ];
 
     /**

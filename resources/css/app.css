@@ -1,0 +1,151 @@
+.footer {
+    background-color: #28a745;
+    /* Remplacez par la couleur de votre choix */
+    color: white;
+    padding: 40px 0;
+}
+
+.footer a {
+    color: white;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer .social-icons a {
+    margin: 0 10px;
+    color: white;
+    font-size: 1.5em;
+}
+
+.footer-bottom {
+    background-color: #343a40;
+    color: #aaa;
+    padding: 15px 0;
+    margin-bottom: 0%;
+    text-align: center;
+}
+
+.footer-bottom a {
+    color: #aaa;
+}
+
+/* css por le caroussel */
+
+.carousel-wrapper {
+    height: 75vh;
+    /* 25% de la hauteur de la fenêtre */
+    width: 100%;
+    /* Toute la largeur */
+    overflow: hidden;
+    /* Assure que rien ne dépasse */
+}
+
+.carousel-item {
+    height: 100%;
+    /* Assure que les items du carrousel prennent toute la hauteur */
+    position: relative;
+    /* Permet de positionner le texte par-dessus */
+}
+
+.carousel-inner {
+    height: 100%;
+    /* Assure que l'intérieur du carrousel occupe toute la hauteur */
+}
+
+.carousel-inner img {
+    height: 100%;
+    /* Les images prennent 100% de la hauteur du carrousel */
+    width: 100%;
+    /* Les images prennent 100% de la largeur */
+    object-fit: cover;
+    /* Ajuste l'image pour couvrir la zone */
+    /* filter: blur(1px); */
+    /* Applique l'effet de flou */
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    /* Couleur du texte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Ombre portée pour améliorer la lisibilité */
+    text-align: center;
+    /* Centrer le texte */
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    /* Fond semi-transparent pour améliorer la visibilité du texte */
+    border-radius: 10px;
+    max-width: 80%;
+    /* Limite la largeur du texte */
+}
+
+.carousel-caption h5 {
+    font-size: 2rem;
+    /* Taille de police plus grande pour le titre */
+    margin-bottom: 1rem;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    /* Taille de police plus grande pour le paragraphe */
+    line-height: 1.5;
+    /* Hauteur de ligne pour une meilleure lisibilité */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .carousel-wrapper {
+        height: 35vh;
+        /* Ajuste la hauteur à 35% pour les écrans moyens */
+    }
+
+    .carousel-caption {
+        font-size: 0.9rem;
+        /* Ajuste la taille de la police pour les écrans moyens */
+        padding: 15px;
+        /* Réduit le padding pour les écrans moyens */
+        max-width: 90%;
+        /* Ajuste la largeur maximale du texte */
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.5rem;
+        /* Taille de police ajustée pour le titre */
+    }
+
+    .carousel-caption p {
+        font-size: 1rem;
+        /* Taille de police ajustée pour le paragraphe */
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-wrapper {
+        height: 45vh;
+        /* Ajuste la hauteur à 45% pour les petits écrans */
+    }
+
+    .carousel-caption {
+        font-size: 0.8rem;
+        /* Ajuste la taille de la police pour les petits écrans */
+        padding: 10px;
+        /* Réduit le padding pour les petits écrans */
+        max-width: 95%;
+        /* Ajuste la largeur maximale du texte */
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.2rem;
+        /* Taille de police ajustée pour le titre */
+    }
+
+    .carousel-caption p {
+        font-size: 0.9rem;
+        /* Taille de police ajustée pour le paragraphe */
+    }
+}

@@ -27,14 +27,9 @@ class Image extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'url',
-        'type',
-        'post_dechet_id'
-    ];
+    protected $fillable = ['path', 'post_dechet_id'];
 
-
-     /**
+    /**
      * Le post de dechet associer a cet image.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

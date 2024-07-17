@@ -3,63 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Liste tous les rôles.
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $roles = Role::all();
+        return response()->json($roles);
+    }
+
+
+    /**
+     * Crée un nouveau rôle.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'nom' => 'required|string|unique:roles|max:255',
+            'description' => 'string',
+        ]);
+
+        $role = Role::create($validated);
+        return response()->json($role, 201);
+    }
+
+
+    /**
+     * Affiche un rôle spécifique.
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function show(int $id): JsonResponse
+    {
+        $role = Role::findOrFail($id);
+        return response()->json($role);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Met à jour un rôle spécifique.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function create()
+    public function update(Request $request, int $id): JsonResponse
     {
-        //
+        $role = Role::findOrFail($id);
+
+        $validated = $request->validate([
+            'nom' => 'required|string|unique:roles,name,' . $role->id . '|max:255',
+            'description' => 'string',
+        ]);
+
+        $role->update($validated);
+        return response()->json($role);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Supprime un rôle spécifique.
+     *
+     * @param int $id
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function destroy(int $id): JsonResponse
     {
-        //
-    }
+        $role = Role::findOrFail($id);
+        $role->delete();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Role $role)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
-    {
-        //
+        return response()->json(null, 204);
     }
 }

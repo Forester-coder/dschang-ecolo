@@ -14,9 +14,8 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
-            $table->string('type');
-            $table->foreignIdFor(PostDechet::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->string('path');
+            $table->foreignIdFor(PostDechet::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

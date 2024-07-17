@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\Subscriber;
+use App\Models\User;
+use App\Notifications\SubscriberNotification;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class NotificationController extends Controller
 {
@@ -12,7 +17,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Notification::all();
+        return view('notifications.index', compact('notifications'));
     }
 
     /**
@@ -20,7 +26,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        return view('notifications.create');
     }
 
     /**
@@ -28,7 +34,31 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'message' => 'required|unique:notifications|max:255',
+        ]);
+
+        $notification = Notification::create($request->all());
+
+        // Envoyer un email à tous les utilisateurs
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notifications()->attach($notification->id);
+
+            // Code pour envoyer l'email peut être ajouté ici
+            $user->notify(new UserNotification($notification->message));
+        }
+
+
+        // Envoyer un email à tous les utilisateurs du systeme de newletter
+        $subscribers = Subscriber::all();
+
+        foreach ($subscribers as $subscriber) {
+            $subscriber->notify(new SubscriberNotification($request->message));
+        }
+
+        return redirect()->route('notifications.index')
+            ->with('success', 'Notification created successfully.');
     }
 
     /**
@@ -36,7 +66,7 @@ class NotificationController extends Controller
      */
     public function show(Notification $notification)
     {
-        //
+        return view('notifications.show', compact('notification'));
     }
 
     /**
@@ -44,7 +74,7 @@ class NotificationController extends Controller
      */
     public function edit(Notification $notification)
     {
-        //
+        return view('notifications.edit', compact('notification'));
     }
 
     /**
@@ -52,7 +82,14 @@ class NotificationController extends Controller
      */
     public function update(Request $request, Notification $notification)
     {
-        //
+        $request->validate([
+            'message' => 'required|unique:notifications,message,' . $notification->id . '|max:255',
+        ]);
+
+        $notification->update($request->all());
+
+        return redirect()->route('notifications.index')
+            ->with('success', 'Notification updated successfully.');
     }
 
     /**
@@ -60,6 +97,9 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
-        //
+        $notification->delete();
+
+        return redirect()->route('notifications.index')
+            ->with('success', 'Notification deleted successfully.');
     }
 }

@@ -41,6 +41,7 @@ return new class extends Migration
             $table->id();
             $table->date('date_debut');
             $table->date('date_fin');
+            $table->boolean('etat');
             $table->foreignIdFor(TypeAbonnement::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(MoyenPaiement::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();

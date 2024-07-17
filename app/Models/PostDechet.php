@@ -45,7 +45,7 @@ class PostDechet extends Model
         return $this->hasMany(Image::class);
     }
 
-     /**
+    /**
      * L'utilisateur associés à ce post de dechet.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -53,5 +53,14 @@ class PostDechet extends Model
     function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function ($builder) {
+            $builder->orderBy('created_at', 'asc');
+        });
     }
 }

@@ -34,5 +34,12 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'mtn' => [
+        'api_key' => env('MTN_API_KEY'),
+        'user_id' => env('MTN_USER_ID'),
+        'api_secret' => env('MTN_API_SECRET'),
+        'primary_key' => env('MTN_PRIMARY_KEY'),
+        'target_env' => env('MTN_TARGET_ENV', 'sandbox'), // default to sandbox
+    ],
 
 ];
