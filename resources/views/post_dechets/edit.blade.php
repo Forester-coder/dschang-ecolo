@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container border border-4 border-success rounded">
-        <h1>Modifier le Post Dechet</h1>
+    <div class="container border border-4 border-success rounded-5">
+        <div class="text-center">
+            <h1>Modifier le Post Dechet</h1>
+        </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,18 +21,18 @@
             @method('PUT')
             <div class="form-group">
                 <label for="contenu">Contenu</label>
-                <textarea name="contenu" id="contenu" class="form-control">{{ old('contenu', $postDechet->contenu) }}</textarea>
+                <textarea name="contenu" id="contenu" class="form-control shadow-lg">{{ old('contenu', $postDechet->contenu) }}</textarea>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="user_id">Utilisateur (Optionnel)</label>
                 <input type="text" name="user_id" id="user_id" class="form-control"
                     value="{{ old('user_id', $postDechet->user_id) }}">
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="images">Images</label>
-                <input type="file" name="images[]" id="images" class="form-control" multiple>
+                <input type="file" name="images[]" id="images" class="form-control shadow-lg" multiple>
             </div>
-            <button type="submit" class="btn btn-primary my-3">Mettre à jour</button>
+            <button type="submit" class="btn btn-success border-5 rounded-5 my-3">Mettre à jour</button>
         </form>
     </div>
 @endsection

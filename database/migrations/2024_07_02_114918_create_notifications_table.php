@@ -32,7 +32,7 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->longText('message')->unique();
+            $table->longText('message');
             $table->timestamps();
         });
     }

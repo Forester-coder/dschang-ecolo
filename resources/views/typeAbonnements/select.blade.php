@@ -8,7 +8,7 @@
             <h1>Abonnez-vous</h1>
         </div> --}}
 
-        <div class="container text-center p-5 border border-4 border-success rounded">
+        <div class="container text-center p-5 border border-4 border-success rounded-5">
             <h2>Choisisez votre mode de paiement</h2>
             <div class="row">
                 <div class="col col-lg-4 col-sm-12 col-md-12 logo">

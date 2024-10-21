@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container border border-5 border-success">
-    <h1>Ajouter un Dépotoir</h1>
+<div class="container border border-5 border-success rounded-5">
+    <div class="text-center">
+        <h1>Ajouter un Dépotoir</h1>
+    </div>
     <form action="{{ route('depotoirs.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -22,7 +24,7 @@
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-primary my-3">Ajouter</button>
+        <button type="submit" class="btn btn-success my-3 rounded-5">Ajouter</button>
     </form>
 </div>
 @endsection

@@ -26,7 +26,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm ">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('images/recycling-8707519_1920.png') }}" style="width: 60px ; height: 60px;"
+                        <img src="{{ asset('images/recycling-160925_1920.png') }}" style="width: 60px ; height: 60px;"
                             alt="">
                         {{ config('app.name', 'Laravel') }}
                     </a>
@@ -66,8 +66,8 @@
                             <!-- Authentication Links -->
                             @guest
                                 @if (Route::has('login'))
-                                    <li class="nav-item border shadow-dark shadow-5">
-                                        <a class="nav-link {{ Route::is('login') ? 'active' : 'text-white' }} "
+                                    <li class="nav-item border rounded-5 shadow-dark shadow-5">
+                                        <a class="nav-link  {{ Route::is('login') ? 'active' : 'text-white' }} "
                                             href="{{ route('login') }}">{{ __('Login / register') }}</a>
                                     </li>
                                 @endif
@@ -79,8 +79,8 @@
                                     </li>
                                 @endif --}}
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle border shadow-dark shadow-5"
+                                <li class="nav-item dropdown ">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle border shadow-dark shadow-5 rounded-5"
                                         href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }}

@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class QuartierController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Affiche une liste de tous les quartiers.
      *

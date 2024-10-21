@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container border border-5 border-success">
-    <h1>Modifier un Dépotoir</h1>
+<div class="container border border-5 border-success rounded-5">
+    <div class="text-center">
+        <h1>Modifier un Dépotoir</h1>
+    </div>
     <form action="{{ route('depotoirs.update', $depotoir) }}" method="POST">
         @csrf
         @method('PUT')
@@ -23,7 +25,7 @@
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-primary my-3 ">Mettre à jour</button>
+        <button type="submit" class="btn btn-success my-3 rounded-5">Mettre à jour</button>
     </form>
 </div>
 @endsection

@@ -62,7 +62,6 @@ class MTNPaymentController extends Controller
                 'user_id' => Auth::id()
             ]);
         } else {
-          
         }
 
 

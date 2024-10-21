@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class MoyenPaiementController extends Controller
 {
+
     /**
      * Liste tous les types d'abonnements.
      *

@@ -24,7 +24,7 @@
                 @foreach($postDechets as $postDechet)
                     <tr>
                         <td>{{ $postDechet->id }}</td>
-                        <td>{{ $postDechet->contenu }}</td>
+                        <td>{{ \Str::words($postDechet->contenu, 10, '...')  }}</td>
                         <td>
                             @foreach($postDechet->images as $image)
                                 <img src="{{ asset('storage/' . $image->path) }}" alt="Image" width="50">

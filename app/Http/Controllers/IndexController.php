@@ -18,7 +18,7 @@ class IndexController extends Controller
      */
     function index()
     {
-        $postDechets = PostDechet::with('user', 'images')->paginate(8);
+        $postDechets = PostDechet::with('user', 'images')->orderBy('created_at', 'desc')->paginate(8);
         return view('welcome', compact('postDechets'));
     }
 

@@ -13,7 +13,7 @@
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('images/5.jpg') }}" class="d-block w-100" alt="Image 2">
+            <img src="{{ asset('images/hands-4091879_1920.jpg') }}" class="d-block w-100" alt="Image 2">
             <div class="carousel-caption">
                 <h5>Réduisez, Réutilisez, Recyclez</h5>
                 <p>La gestion des déchets commence par la réduction des déchets à la source. En adoptant des habitudes

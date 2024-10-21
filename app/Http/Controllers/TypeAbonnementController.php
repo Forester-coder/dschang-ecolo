@@ -15,6 +15,12 @@ use Illuminate\Http\Request;
  */
 class TypeAbonnementController extends Controller
 {
+
+
+
+    public function __construct() {
+        $this->middleware('auth')->only(['selectTypeAbonnement']);
+    }
     /**
      * Liste tous les types d'abonnement.
      *

@@ -9,12 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class PostDechetController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['index' , 'create' , 'update' , 'store' , 'destroy']);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $postDechets = PostDechet::with('images')->get();
+
+        $postDechets = PostDechet::with('images')->orderBy('created_at','des')->get();
         return view('post_dechets.index', compact('postDechets'));
     }
 
@@ -37,15 +45,15 @@ class PostDechetController extends Controller
         ]);
 
         $postDechet = PostDechet::create($request->only(['contenu']));
-        // $postDechet->user_id = Auth::id();
+        $postDechet->user_id = Auth::id();
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('images', 'public');
                 $postDechet->images()->create(['path' => $path]);
             }
         }
-
-        return redirect()->route('index');
+        $postDechet->save();
+        return redirect()->route('post-dechets.show', $postDechet);
     }
 
     /**
@@ -69,6 +77,8 @@ class PostDechetController extends Controller
      */
     public function update(Request $request, PostDechet $postDechet)
     {
+        // $this->authorize('update' , $postDechet);
+
         $request->validate([
             'contenu' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -83,7 +93,7 @@ class PostDechetController extends Controller
             }
         }
 
-        return redirect()->route('index');
+        return redirect()->route('post-dechets.show', $postDechet);
     }
 
     /**
@@ -91,6 +101,8 @@ class PostDechetController extends Controller
      */
     public function destroy(PostDechet $postDechet)
     {
+        // $this->authorize('destroy' , $postDechet);
+
         foreach ($postDechet->images as $image) {
             Storage::delete($image->path);
             $image->delete();
@@ -98,6 +110,6 @@ class PostDechetController extends Controller
 
         $postDechet->delete();
 
-        return redirect()->route('post-dechets.index');
+        return redirect()->route('index');
     }
 }

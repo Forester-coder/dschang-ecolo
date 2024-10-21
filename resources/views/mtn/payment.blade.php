@@ -1,13 +1,8 @@
 @extends('layouts.app')
 
 
-
 @section('content')
-    @php
-        // par defaut dans la base de donnee le mode de paiement avec MTN aura l'ID "1"
-        $moyenPaiement = 1;
-    @endphp
-    <div class="container py-3 border border-5 border-success rounded">
+    <div class="container py-3 border border-5 border-success rounded-5">
 
         <div class="logo d-flex justify-content-center">
             <img src="{{ asset('images/LogoMoMo.jpeg') }}" alt="logo de MoMo">

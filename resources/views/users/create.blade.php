@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4 border border-4 border-success rounded">
-
-        <h1 class="my-4">Create User</h1>
+    <div class="container mt-4 border border-4 border-success rounded-5">
+        <div class="text-center">
+            <h1 class="my-4">Create User</h1>
+        </div>
         <form action="{{ route('users.store') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -45,7 +46,7 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary my-3">Create</button>
+            <button type="submit" class="btn btn-success my-3 rounded-5">Create</button>
         </form>
     </div>
 @endsection

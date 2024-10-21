@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4 border border-4 border-success rounded">
+    <div class="container mt-4 border border-4 border-success rounded-5">
         <h1 class="my-4">Users</h1>
         <form action="{{ route('users.index') }}" method="GET" class="form-inline mb-4 d-flex">
-            <input type="text" name="search" placeholder="rechercher par le nom , l'email ou le telephone" value="{{ request('search') }}" class="form-control mr-2">
-            <button type="submit" class="btn btn-primary ms-2">Search</button>
+            <input type="text" name="search" placeholder="rechercher par le nom , l'email ou le telephone" value="{{ request('search') }}" class="form-control mr-2 rounded-5">
+            <button type="submit" class="btn btn-success ms-2 rounded-5">Search</button>
         </form>
-        <a href="{{ route('users.create') }}" class="btn btn-success mb-4">Create User</a>
-        <table class="table table-striped border border-1 border-success rounded">
+        <a href="{{ route('users.create') }}" class="btn btn-success mb-4 rounded-5">Create User</a>
+        <table class="table table-striped border border-1 border-success rounded-5">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Nom</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Actions</th>

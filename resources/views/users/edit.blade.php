@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4 border border-4 border-success rounded">
+    <div class="container mt-4 border border-4 border-success rounded-5">
         <h1 class="my-4">Edit User</h1>
         <form action="{{ route('users.update', $user) }}" method="POST">
             @csrf
